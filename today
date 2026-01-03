@@ -1,0 +1,8 @@
+#!/bin/bash
+DIR=$(pwd)
+if [ "$DIR" != "$HOME/diary" ]; then
+    echo "Please run this script from the ~/diary."
+    exit 1
+fi 
+FILENAME=$(date +%Y-%m-%d)
+nvim ${FILENAME}.md
