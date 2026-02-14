@@ -27,7 +27,6 @@ for sub in {A..G}; do
 #include <atcoder/all>
 using namespace std;
 using namespace atcoder;
-typedef long long int;
 
 int main() {
 }
