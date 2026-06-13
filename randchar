@@ -1,0 +1,8 @@
+#!/bin/bash
+# how to use: genchar <size> 
+# generate random strings which length is <size>
+
+num=${1:-1}
+LC_ALL=C tr -dc 'a-z' < /dev/urandom | head -c $num
+echo
+

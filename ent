@@ -1,3 +1,28 @@
 #!/bin/bash
 
-nvim -c "set keywordprg=dict" test
+sentence=$(curl -s https://dummyjson.com/quotes/random | jq -r '.quote')
+
+say -v Samantha "$sentence" &
+
+
+wrong=""
+
+for i in $sentence;
+do
+	i=$(gentypo $i 5);
+	wrong=$wrong$i" ";
+done
+
+wrong="${wrong% }"
+
+trap "rm -f /tmp/ent" EXIT
+echo "$wrong" > /tmp/ent
+nvim /tmp/ent 
+
+if [ "$(cat /tmp/ent)" = "$sentence" ]; then
+	echo perfect!
+	say -v Samantha perfect!
+else
+	wdiff <(cat /tmp/ent) <(echo $sentence)
+	say -v Samantha "$sentence"
+fi
